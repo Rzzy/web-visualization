@@ -9,8 +9,11 @@
     display: flex; 
     .wraps{
         flex: 1;
-        border: 1px dashed #f73;
+        border-left: 1px dashed #f73;
         text-align: center;
+        &:first-child{
+          border-left: 0;
+        }
      }
  }
 
