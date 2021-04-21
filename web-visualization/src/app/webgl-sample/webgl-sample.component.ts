@@ -8,27 +8,33 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 export class WebglSampleComponent implements OnInit {
   @ViewChild('mainCanvas') canvasView !: ElementRef;
   scale:number = 0.99  
-
+  isnormalcolor:boolean = false
   constructor() { }
 
   ngOnInit(): void {
   }
   ngAfterViewInit(): void {
-    this.drawTriangle(true) 
+    this.drawTriangle() 
   }
   halfSizeTriangle(): void{
     // 将 gl_Position = vec4(position, 1.0, 1.0); 修改为 gl_Position = vec4(position * 0.5, 1.0, 1.0);
-    this.scale = 0.5
-    this.drawTriangle(true) 
+    this.scale = this.scale / 2
+    this.drawTriangle() 
   }
   clickMe(): void {
+    this.scale = this.scale * 2
+    this.drawTriangle()
+  }
+  reset(){
     this.scale = 0.99
-    this.drawTriangle(true)
+    this.isnormalcolor = false
+    this.drawTriangle() 
   }
   changeColor(): void {
-    this.drawTriangle(false)
+    this.isnormalcolor = !this.isnormalcolor
+    this.drawTriangle()
   }
-  drawTriangle(isnormalcolor: boolean): void {
+  drawTriangle(): void {
     //1、 创建 WebGL 上下文
     const canvas = this.canvasView.nativeElement
     const gl = canvas.getContext('webgl');
@@ -38,7 +44,7 @@ export class WebglSampleComponent implements OnInit {
         varying vec3 color;
         void main() { 
           gl_PointSize = 1.0; 
-          color = ${isnormalcolor ? 'vec3(0.5 + position * 0.5, 0.0)' : 'vec3(1.0, 0.0, 0.0)' };
+          color = ${this.isnormalcolor ? 'vec3(0.5 + position * 0.5, 0.0)' : 'vec3(1.0, 0.0, 0.0)' };
           gl_Position = vec4(position * ${ this.scale }, 1.0, 1.0);  
         }`; // 顶点着色器 
    const fragment: string = `
