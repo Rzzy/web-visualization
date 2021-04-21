@@ -7,26 +7,50 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 })
 export class WebglSampleComponent implements OnInit {
   @ViewChild('mainCanvas') canvasView !: ElementRef;
+  scale:number = 0.99  
+
   constructor() { }
 
   ngOnInit(): void {
   }
-  ngAfterViewInit() {
-    
+  ngAfterViewInit(): void {
+    this.drawTriangle(true) 
   }
-  clickMe(){
-    this.drawTriangle()
+  halfSizeTriangle(): void{
+    // 将 gl_Position = vec4(position, 1.0, 1.0); 修改为 gl_Position = vec4(position * 0.5, 1.0, 1.0);
+    this.scale = 0.5
+    this.drawTriangle(true) 
   }
-  drawTriangle(){
+  clickMe(): void {
+    this.scale = 0.99
+    this.drawTriangle(true)
+  }
+  changeColor(): void {
+    this.drawTriangle(false)
+  }
+  drawTriangle(isnormalcolor: boolean): void {
     //1、 创建 WebGL 上下文
     const canvas = this.canvasView.nativeElement
     const gl = canvas.getContext('webgl');
    // 2、 创建 WebGL 程序
-   const vertex: string = ` attribute vec2 position; void main() { gl_PointSize = 1.0; gl_Position = vec4(position, 1.0, 1.0); }`; // 顶点着色器
-   const fragment: string = ` precision mediump float; void main() { gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); } `; // 片元着色器
+   const vertex: string = ` 
+        attribute vec2 position; 
+        varying vec3 color;
+        void main() { 
+          gl_PointSize = 1.0; 
+          color = ${isnormalcolor ? 'vec3(0.5 + position * 0.5, 0.0)' : 'vec3(1.0, 0.0, 0.0)' };
+          gl_Position = vec4(position * ${ this.scale }, 1.0, 1.0);  
+        }`; // 顶点着色器 
+   const fragment: string = `
+        precision mediump float; 
+        varying vec3 color;
+        void main() { 
+          gl_FragColor = vec4(color, 1.0); 
+        } `; // 片元着色器
 
    // 将着色器代码片段创建成shader对象 
    const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+
    gl.shaderSource(vertexShader, vertex);
    gl.compileShader(vertexShader);
    
