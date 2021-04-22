@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SvgHtmlCssComponent } from './svg-html-css/svg-html-css.component';
 import { WebglSampleComponent } from './webgl-sample/webgl-sample.component';
+import { RoughSampleComponent } from './rough-sample/rough-sample.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SvgHtmlCssComponent,
-    WebglSampleComponent
+    WebglSampleComponent,
+    RoughSampleComponent
   ],
   imports: [
     BrowserModule,
