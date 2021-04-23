@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { SvgHtmlCssComponent } from './svg-html-css/svg-html-css.component';
 import { WebglSampleComponent } from './webgl-sample/webgl-sample.component';
 import { RoughSampleComponent } from './rough-sample/rough-sample.component';
+import { VectorTreeComponent } from './vector-tree/vector-tree.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SvgHtmlCssComponent,
     WebglSampleComponent,
-    RoughSampleComponent
+    RoughSampleComponent,
+    VectorTreeComponent
   ],
   imports: [
     BrowserModule,
