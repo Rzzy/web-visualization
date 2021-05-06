@@ -5,6 +5,7 @@ import { WebglSampleComponent } from './webgl-sample/webgl-sample.component'
 import { SvgHtmlCssComponent } from './svg-html-css/svg-html-css.component'
 import { RoughSampleComponent } from './rough-sample/rough-sample.component'
 import { VectorTreeComponent } from './vector-tree/vector-tree.component'
+import { CurveVectorComponent } from './curve-vector/curve-vector.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/svg-html-css', pathMatch: 'full' },
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'vector-tree',
     component: VectorTreeComponent
+  },
+  {
+    path: 'curve-vector',
+    component: CurveVectorComponent
   }
 ];
 

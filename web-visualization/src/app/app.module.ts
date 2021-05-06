@@ -7,6 +7,7 @@ import { SvgHtmlCssComponent } from './svg-html-css/svg-html-css.component';
 import { WebglSampleComponent } from './webgl-sample/webgl-sample.component';
 import { RoughSampleComponent } from './rough-sample/rough-sample.component';
 import { VectorTreeComponent } from './vector-tree/vector-tree.component';
+import { CurveVectorComponent } from './curve-vector/curve-vector.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { VectorTreeComponent } from './vector-tree/vector-tree.component';
     SvgHtmlCssComponent,
     WebglSampleComponent,
     RoughSampleComponent,
-    VectorTreeComponent
+    VectorTreeComponent,
+    CurveVectorComponent
   ],
   imports: [
     BrowserModule,
